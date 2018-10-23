@@ -16,6 +16,8 @@ Create Table Config
 	GameId Int Not Null,
 	DollarsPerCredit Float Not Null,
 	HandsPlayed Int Not Null,
+        Target Int,
+        Bankroll Int,
 	Constraint FK_Config_Game Foreign Key(GameId) References Game(Id)
 )
 
@@ -33,7 +35,7 @@ Create Table Result
 
 go
 
-Create Procedure AddResult
+CREATE Procedure [dbo].[AddResult]
 	@Game NVarChar(50),
 	@DollarsPerTierCredit Int,
 	@DollarsPerCredit Float,
@@ -42,7 +44,9 @@ Create Procedure AddResult
 	@EndCredits Float,
 	@TotalHandsPlayed Int,
 	@CoinIn Float,
-	@TierCreditsEarned Int
+	@TierCreditsEarned Int,
+	@Bankroll Int,
+	@TargetPoints Int
 AS
 BEGIN
 
@@ -57,17 +61,53 @@ BEGIN
 		set @GameID = @@IDENTITY
 	END
 
-	Select @ConfigID = Id From Config Where GameId=@GameID and DollarsPerCredit = @DollarsPerCredit and HandsPlayed = @HandsPlayed
+	Select @ConfigID = Id From Config Where GameId=@GameID and DollarsPerCredit = @DollarsPerCredit and HandsPlayed = @HandsPlayed and Bankroll = @Bankroll and Target = @TargetPoints
 
 	IF(@ConfigID is null)
 	BEGIN
-		Insert Config(GameId, DollarsPerCredit, HandsPlayed)
-			Values(@GameID, @DollarsPerCredit, @HandsPlayed)
+		Insert Config(GameId, DollarsPerCredit, HandsPlayed, Bankroll, Target)
+			Values(@GameID, @DollarsPerCredit, @HandsPlayed, @Bankroll, @TargetPoints)
 		set @ConfigID = @@IDENTITY
 	END
 
 	Insert Result(ConfigId, StartCredits, EndCredits, HandsPlayed, CoinIn, TierCreditsEarned)
 		Values(@ConfigID, @StartCredits, @EndCredits, @TotalHandsPlayed, @CoinIn, @TierCreditsEarned)
 END
+
+
+
+
+GO
+
+CREATE View [dbo].[VpResults]
+as
+select *, DollarsPerCredit * 5 * HandsPlayed as DollarsPerHand, HandsNeeded * (10/60.0) as EstMinutesNeeded, HandsNeeded * (10/3600.0) as EstHoursNeeded from
+(
+	select Name + ' $'+ Convert(NvarChar(20), DollarsPerCredit) + ' x '+ConverT(NvarChar(50), c.HandsPlayed) as Game, 
+		g.Name, 
+		c.DollarsPerCredit, 
+		c.HandsPlayed,		
+		c.Bankroll,
+		c.Target,
+		Avg(EndCredits) as Avg, STDEV(EndCredits) as StdDev,
+		count(*) as Trials,
+		Ceiling(c.Target/((c.DollarsPerCredit * 5 * c.HandsPlayed)/g.DollarsPerTierCredit)) as HandsNeeded,
+		(select count(*)*1.0 from result rr where rr.ConfigId=c.Id and rr.EndCredits = 0)/(select count(*)*1.0 from result rr where rr.ConfigId=c.Id) * 100 as RiskOfRuin
+	from game g
+	join config c on c.GameId=g.id
+	join result r on r.ConfigId=c.Id
+	Where r.EndCredits<=r.StartCredits*2
+	group by g.Name, c.id, c.DollarsPerCredit, c.HandsPlayed, g.DollarsPerTierCredit, c.Bankroll, c.Target
+) a	---order by g.Name, c.DollarsPerCredit, c.HandsPlayed
+where trials>100
+
+GO
+
+CREATE View [dbo].[VpGames]
+AS
+	select g.id as GameId, c.id as ConfigId, g.Name, c.DollarsPerCredit, c.HandsPlayed, Name + ' $'+ Convert(NvarChar(20), DollarsPerCredit) + ' x '+ConverT(NvarChar(50), HandsPlayed) as Game
+	from game g
+	join config c on c.GameId=g.id
+GO
 
 
