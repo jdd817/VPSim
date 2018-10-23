@@ -1,0 +1,29 @@
+﻿<div>
+    <style>
+        .breakdown div.xAxis div.tickLabel 
+        {    
+            transform: rotate(60deg);
+            -ms-transform:rotate(60deg); /* IE 9 */
+            -moz-transform:rotate(60deg); /* Firefox */
+            -webkit-transform:rotate(60deg); /* Safari and Chrome */
+            -o-transform:rotate(60deg); /* Opera */
+            /*rotation-point:50% 50%;*/ /* CSS3 */
+            /*rotation:270deg;*/ /* CSS3 */
+            padding-left:7px;
+        }
+    </style>
+    <div>
+        <select ng-model="inputs.game" ng-options="game.Name for game in pickLists.games"></select>
+    </div>
+    <div>
+        <select ng-model="inputs.config" ng-options="'$'+config.DollarsPerCredit+'x'+config.HandsPlayed for config in pickLists.configs"></select>
+    </div>
+
+    <div style="height:600px;width:800px;">
+        <flot dataset="rawChartData" options="rawChartOptions"></flot>
+    </div>
+
+    <div style="height:600px;width:800px;" class="breakdown">
+        <flot dataset="breakdownChartData" options="breakdownChartOptions"></flot>
+    </div>
+</div>

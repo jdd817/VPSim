@@ -1,0 +1,66 @@
+﻿body {
+}
+
+
+.screen{
+    background-color: #0000CC;
+    color:white;
+}
+
+.payTable{
+    font-size:smaller;
+    font-weight:bold;
+    border:4px inset White;
+}
+
+.payTable div{
+    display:table-row;
+}
+
+.payTable div span{
+    display:table-cell;
+    width:150px;
+}
+
+.betInfo div{
+    display:inline-block;
+    font-size:medium;
+    font-weight:bold;
+    width:100px;
+}
+
+.buttons button{
+    display:inline-block;
+    cursor:pointer;
+    border:4px inset #BBBBBB;
+    margin:8px;
+    padding-left:12px;
+    padding-right:12px;
+    background-color:#FFFF88;
+    color:black;
+}
+
+.buttons button.disabled{
+    background-color:#666666;
+    color:#666666;
+}
+
+.card {
+    display: inline-block;
+    margin-left: 3px;
+    margin-right: 3px;
+    background-image: url('cards.png');
+    border:2px solid black;
+}
+
+.card.held{
+    border:2px solid red;
+}
+
+.card.correctHold{
+    border-top:2px solid green;
+}
+
+.card.notHeld{
+    visibility:hidden;
+}

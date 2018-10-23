@@ -1,0 +1,54 @@
+﻿
+<div class="screen">
+    <div class="gameSelect">
+        <select ng-model="vp.game" ng-options="game.Game for game in vp.gameList"></select>
+    </div>
+    <div class="payTable">
+        <div ng-repeat="payLine in vp.game.Paytable.PayLines | orderBy:'Payout':true">
+            <span>{{payLine.Name}}</span><span>{{payLine.Payout}}</span>
+        </div>
+    </div>
+    <div class="multiHands">
+        <hand-result ng-repeat="result in vp.additionalHands" result="result"></hand-result>
+    </div>
+    <div class="cards">
+        <card ng-repeat="card in vp.hand" card="card" ng-click="hold($index)" ng-class="{held:vp.holds[$index], correctHold: vp.correctHolds[$index]}"></card>
+    </div>    
+    <div class="cards" style="position:relative;top:-70px;left:30px;" ng-show="vp.gameState==1">
+        <div style="position:absolute">
+            <card ng-repeat="card in vp.originalHand" card="card" ng-class="{held:vp.holds[$index], correctHold: vp.correctHolds[$index], notHeld: !vp.correctHolds[$index]}"></card>
+        </div>
+    </div>
+    <div class="spacer" style="height:30px;"></div>
+    <div style="color:#AAAAAA;background-color:#006600;" ng-style="payoutVisibility">
+        {{vp.handResult.PayLineHit}}<span ng-if="vp.gameState==1"> - {{vp.handResult.Payout}}</span>
+    </div>
+    <div class="betInfo">
+        <div class="lastWin">{{vp.paid}}</div>
+        <div class="hands">{{vp.hands}}</div>
+        <div class="currentBet">{{vp.bet}}</div>
+        <div class="currentCredits">{{vp.credits}}</div>
+    </div>
+    <div class="betInfo">
+        <div class="tierCredits">{{vp.tierCredits|number:0}}</div>
+        <div>{{vp.dollarsPerCredit|currency}}</div>
+        <div></div>
+        <div class="dollars">{{vp.credits * vp.dollarsPerCredit | currency}}</div>
+    </div>
+    <div class="buttons">
+        <button ng-class="{disabled:vp.gameState!=1}" ng-click="addHand()">Hands</button>
+        <button ng-class="{disabled:vp.gameState!=1}" ng-click="bet()">Bet</button>
+        <button ng-class="{disabled:vp.gameState!=1}" ng-click="maxBet()">Max Bet</button>
+        <button ng-click="deal()">Deal</button>
+    </div>
+    <div class="buttons">
+        <button ng-class="{disabled:vp.gameState!=1}" ng-click="changeDenom()">Denom</button>
+        <button ng-class="{disabled:vp.gameState!=1}" ng-click="addHundo()">Add $100</button>
+    </div>
+    <div class="spacer" style="height:50px;"></div>
+    <div class="mistakes">
+        <div class="cards" ng-repeat="mistake in vp.mistakes">
+            <card ng-repeat="card in mistake.hand" card="card" ng-class="{held:mistake.holds[$index], correctHold: mistake.correctHolds[$index]}" width="36" height="49"></card>
+        </div> 
+    </div>
+</div>

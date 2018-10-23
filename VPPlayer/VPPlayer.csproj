@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{013B92D9-C591-4CCF-BC42-3E70231C19F9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VPPlayer</RootNamespace>
+    <AssemblyName>VPPlayer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DbHandTiers\Flush.cs" />
+    <Compile Include="DbHandTiers\FourToRoyal.cs" />
+    <Compile Include="DbHandTiers\HighCards.cs" />
+    <Compile Include="DbHandTiers\HighCardTenSuited.cs" />
+    <Compile Include="DbHandTiers\Pair.cs" />
+    <Compile Include="DbHandTiers\PartialStrait.cs" />
+    <Compile Include="DbHandTiers\PartialStraitFlush.cs" />
+    <Compile Include="DbHandTiers\PatFullHouse.cs" />
+    <Compile Include="DbHandTiers\PatQuad.cs" />
+    <Compile Include="DbHandTiers\PatStrait.cs" />
+    <Compile Include="DbHandTiers\PatStraitFlush.cs" />
+    <Compile Include="DbHandTiers\PatThreeOfAKind.cs" />
+    <Compile Include="DbHandTiers\TwoPair.cs" />
+    <Compile Include="DdbHandTiers\Flush.cs" />
+    <Compile Include="DdbHandTiers\FourToRoyal.cs" />
+    <Compile Include="DdbHandTiers\HighCards.cs" />
+    <Compile Include="DdbHandTiers\HighCardTenSuited.cs" />
+    <Compile Include="DdbHandTiers\Pair.cs" />
+    <Compile Include="DdbHandTiers\PartialStrait.cs" />
+    <Compile Include="DdbHandTiers\PartialStraitFlush.cs" />
+    <Compile Include="DdbHandTiers\PatFullHouse.cs" />
+    <Compile Include="DdbHandTiers\PatQuad.cs" />
+    <Compile Include="DdbHandTiers\PatStrait.cs" />
+    <Compile Include="DdbHandTiers\PatStraitFlush.cs" />
+    <Compile Include="DdbHandTiers\PatThreeOfAKind.cs" />
+    <Compile Include="DdbHandTiers\TwoPair.cs" />
+    <Compile Include="DW44HandTiers\FourDeuces\FourDeuces.cs" />
+    <Compile Include="DW44HandTiers\NoDeuces\Flush.cs" />
+    <Compile Include="DW44HandTiers\NoDeuces\FourOfAKind.cs" />
+    <Compile Include="DW44HandTiers\NoDeuces\FullHouse.cs" />
+    <Compile Include="DW44HandTiers\NoDeuces\Pair.cs" />
+    <Compile Include="DW44HandTiers\NoDeuces\PartialRoyal.cs" />
+    <Compile Include="DW44HandTiers\NoDeuces\PatRoyalFlush.cs" />
+    <Compile Include="DW44HandTiers\NoDeuces\Strait.cs" />
+    <Compile Include="DW44HandTiers\NoDeuces\StraitFlush.cs" />
+    <Compile Include="DW44HandTiers\NoDeuces\SuitedHighCards.cs" />
+    <Compile Include="DW44HandTiers\NoDeuces\ThreeOfAKind.cs" />
+    <Compile Include="DW44HandTiers\NoDeuces\TwoPair.cs" />
+    <Compile Include="DW44HandTiers\OneDeuce\FiveOfAKind.cs" />
+    <Compile Include="DW44HandTiers\OneDeuce\Flush.cs" />
+    <Compile Include="DW44HandTiers\OneDeuce\FourOfAKind.cs" />
+    <Compile Include="DW44HandTiers\OneDeuce\FullHouse.cs" />
+    <Compile Include="DW44HandTiers\OneDeuce\OneWild.cs" />
+    <Compile Include="DW44HandTiers\OneDeuce\PartialStrait.cs" />
+    <Compile Include="DW44HandTiers\OneDeuce\PatStrait.cs" />
+    <Compile Include="DW44HandTiers\OneDeuce\RoyalFlush.cs" />
+    <Compile Include="DW44HandTiers\OneDeuce\StraitFlush.cs" />
+    <Compile Include="DW44HandTiers\OneDeuce\ThreeOfAKind.cs" />
+    <Compile Include="DW44HandTiers\ThreeDeuces\PatRoyalFlush.cs" />
+    <Compile Include="DW44HandTiers\ThreeDeuces\ThreeWilds.cs" />
+    <Compile Include="DW44HandTiers\TwoDeuces\FourOfAKind.cs" />
+    <Compile Include="DW44HandTiers\TwoDeuces\PatFiveOfAKind.cs" />
+    <Compile Include="DW44HandTiers\TwoDeuces\Royal.cs" />
+    <Compile Include="DW44HandTiers\TwoDeuces\StraitFlush.cs" />
+    <Compile Include="DW44HandTiers\TwoDeuces\TwoWilds.cs" />
+    <Compile Include="JobHandTiers\HighCards.cs" />
+    <Compile Include="JobHandTiers\HighCardTenSuited.cs" />
+    <Compile Include="JobHandTiers\PartialStrait.cs" />
+    <Compile Include="JobHandTiers\PartialStraitFlush.cs" />
+    <Compile Include="JobHandTiers\FourToRoyal.cs" />
+    <Compile Include="IHandTier.cs" />
+    <Compile Include="JobHandTiers\Pair.cs" />
+    <Compile Include="JobHandTiers\Flush.cs" />
+    <Compile Include="JobHandTiers\PatFullHouse.cs" />
+    <Compile Include="JobHandTiers\PatQuad.cs" />
+    <Compile Include="JobHandTiers\PatStrait.cs" />
+    <Compile Include="JobHandTiers\PatStraitFlush.cs" />
+    <Compile Include="JobHandTiers\PatThreeOfAKind.cs" />
+    <Compile Include="JobHandTiers\TwoPair.cs" />
+    <Compile Include="VpPlayer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hands\Hands.csproj">
+      <Project>{bd2d8842-30fa-4893-afb7-52404b9bce32}</Project>
+      <Name>Hands</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
