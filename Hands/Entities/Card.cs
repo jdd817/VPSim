@@ -89,5 +89,10 @@ namespace Hands.Entities
             Card B = (Card)obj;
             return A.Value == B.Value && A.Suit == B.Suit;
         }
+
+        public override int GetHashCode()
+        {
+            return (this.Value << 2) + this.Suit;
+        }
     }
 }

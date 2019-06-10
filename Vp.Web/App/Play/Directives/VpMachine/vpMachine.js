@@ -28,6 +28,11 @@
                     $scope.vp.credits += 100 / $scope.vp.dollarsPerCredit;
             }
 
+            $scope.addThow = function () {
+                if ($scope.vp.gameState == 1)
+                    $scope.vp.credits += 1000 / $scope.vp.dollarsPerCredit;
+            }
+
             $scope.maxBet = function () {
                 if ($scope.vp.gameState == 1) {
                     $scope.vp.bet = 5;
